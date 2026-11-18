@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0a0a12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Swipe</title>
 <style>
-:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#9a9a9a;--acc:#fe2c55;--bar:#0b0b0b;box-sizing:border-box}
+:root{color-scheme:dark;--bg:#0a0a12;--fg:#fff;--mut:#9a9ab0;--acc:#7c5cff;--acc2:#ff6bb5;--like:#ff4d8d;--bar:#0e0e18;box-sizing:border-box}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:#111;color:var(--fg);font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+html,body{height:100%;background:#05050a;color:var(--fg);font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;overflow:hidden}
 #app{position:relative;height:100dvh;max-width:480px;margin:0 auto;background:var(--bg);overflow:hidden}
 .view{position:absolute;inset:0 0 56px 0;display:none}
 .view.on{display:block}
@@ -33,7 +33,7 @@ html,body{height:100%;background:#111;color:var(--fg);font-family:-apple-system,
 #cfm{position:absolute;inset:0;z-index:80;background:#000a;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px}
 #cfm.on{display:flex;animation:fi .18s}
 .cbox{width:100%;max-width:320px;background:#1c1c1e;border:1px solid #2c2c2e;border-radius:22px;padding:26px 22px 18px;text-align:center;box-shadow:0 20px 60px #000b;animation:up .22s cubic-bezier(.2,.9,.3,1.2)}
-.cic{width:64px;height:64px;border-radius:50%;background:#fe2c5526;display:grid;place-items:center;margin:0 auto 14px}
+.cic{width:64px;height:64px;border-radius:50%;background:#ff5fa826;display:grid;place-items:center;margin:0 auto 14px}
 .cic svg{width:30px;height:30px;fill:var(--acc)}
 .cbox h3{font-size:19px;margin-bottom:6px}
 .cbox p{color:var(--mut);font-size:14px;line-height:1.45;margin-bottom:20px}
@@ -43,6 +43,26 @@ html,body{height:100%;background:#111;color:var(--fg);font-family:-apple-system,
 #cyes{background:var(--acc)}
 @keyframes fi{from{opacity:0}}
 @keyframes up{from{opacity:0;transform:translateY(20px) scale(.92)}}
+.av{overflow:hidden}.av img{width:100%;height:100%;object-fit:cover;display:block}
+.gear{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:3;background:none;border:0;color:#fff;cursor:pointer;padding:6px}.gear svg{width:26px;height:26px;fill:currentColor;display:block}
+.row{display:flex;align-items:center;gap:14px;padding:15px 4px;border-bottom:1px solid #1d1d1d;cursor:pointer;font-size:16px}.row .i{width:28px;text-align:center;font-size:20px}.row .ch{margin-left:auto;color:var(--mut)}.row.red{color:#ff5a6e}
+.fbtn.msg{margin-left:6px}
+.tag{color:#c4b5fd;font-weight:600;cursor:pointer}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}.chips:empty{display:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;background:#1a1a1a;border:1px solid #2c2c2e;border-radius:18px;padding:7px 13px;font-size:13px;color:#c4b5fd;cursor:pointer}
+.cv{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid #1d1d1d;cursor:pointer}.cv .av{width:48px;height:48px;font-size:19px;border-width:1px;flex:0 0 auto}.cv .t{flex:1;min-width:0}.cv .t b{display:block}.cv .t span{display:block;color:var(--mut);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cv time{color:var(--mut);font-size:11px}
+#thread{position:absolute;inset:0;z-index:40;background:#000;display:none;flex-direction:column}#thread.on{display:flex}
+#thread header{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;border-bottom:1px solid #1d1d1d}
+#thread header button{background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1}
+#thread .av{width:36px;height:36px;font-size:15px;border-width:1px}
+#msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:6px}
+.bub{max-width:78%;padding:9px 13px;border-radius:18px;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.bub.me{align-self:flex-end;background:var(--acc);border-bottom-right-radius:5px}
+.bub.th{align-self:flex-start;background:#262626;border-bottom-left-radius:5px}
+.bub small{display:block;font-size:10px;opacity:.6;margin-top:3px}
+#mf{display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid #1d1d1d}
+#mf input{flex:1;background:#1a1a1a;border:0;border-radius:22px;color:#fff;padding:11px 16px;font:inherit}
+#mf button{background:var(--acc);border:0;color:#fff;border-radius:22px;padding:0 18px;font:600 14px inherit;cursor:pointer}
 #prog{position:absolute;inset:0;background:#000d;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px}#prog.on{display:flex}
 .ring{position:relative;width:200px;height:200px}.ring svg{display:block}#pg-txt{position:absolute;inset:0;display:grid;place-items:center;font-size:40px;font-weight:700}#pg-ring{transition:stroke-dashoffset .2s}
 .heart{position:absolute;font-size:90px;transform:translate(-50%,-50%);pointer-events:none;animation:hp .8s forwards}
@@ -52,7 +72,7 @@ nav button{flex:1;background:none;border:0;color:var(--mut);font-size:11px;displ
 nav button.on{color:#fff}
 nav svg{width:24px;height:24px;fill:currentColor}
 nav .plus{flex:0 0 56px}
-nav .plus i{display:block;width:44px;height:30px;border-radius:9px;background:linear-gradient(90deg,#25f4ee 0 30%,var(--acc) 70%);position:relative}
+nav .plus i{display:block;width:44px;height:30px;border-radius:9px;background:linear-gradient(90deg,#8b6cff 0 30%,var(--acc) 70%);position:relative}
 nav .plus i::after{content:"+";position:absolute;inset:2px 6px;background:#fff;color:#000;border-radius:7px;display:grid;place-items:center;font-size:22px;font-weight:700}
 .page{height:100%;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 14px 20px}
 .page h2{font-size:20px;margin-bottom:12px}
@@ -66,7 +86,7 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
 .drop{display:block;border:2px dashed #444;border-radius:14px;padding:26px;text-align:center;color:var(--mut);margin-bottom:12px;cursor:pointer}
 #prev{width:100%;max-height:260px;object-fit:cover;border-radius:12px;margin-bottom:10px;display:none}
 .prof{text-align:center;padding-top:10px}
-.prof .av{width:84px;height:84px;margin:0 auto 10px;font-size:34px;background:linear-gradient(135deg,#25f4ee,#fe2c55)}
+.prof .av{width:84px;height:84px;margin:0 auto 10px;font-size:34px;background:linear-gradient(135deg,#8b6cff,#ff5fa8)}
 .stats{display:flex;justify-content:center;gap:22px;margin:14px 0}
 .stats b{display:block;font-size:18px}.stats span{font-size:12px;color:var(--mut)}
 .ppl{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid #1d1d1d;cursor:pointer}.ppl .av{width:40px;height:40px;font-size:16px;border-width:1px;flex:0 0 auto}.ppl small{color:var(--mut);display:block;font-size:12px}.back{background:#222;border:0;color:#fff;border-radius:16px;padding:6px 12px;font:13px inherit;margin-bottom:10px;cursor:pointer}
@@ -83,19 +103,61 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
 #toast{position:absolute;left:50%;top:70px;transform:translateX(-50%);background:#fffe;color:#000;padding:8px 14px;border-radius:20px;font-size:13px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%;text-align:center}
 #auth{position:absolute;inset:0;background:#000;z-index:50;display:none;flex-direction:column;justify-content:center;padding:24px}
 #auth.on{display:flex}
-#auth h1{font-size:34px;text-align:center;margin-bottom:4px;background:linear-gradient(90deg,#25f4ee,#fe2c55);-webkit-background-clip:text;background-clip:text;color:transparent}
+#auth h1{font-size:34px;text-align:center;margin-bottom:4px;background:linear-gradient(90deg,#8b6cff,#ff5fa8);-webkit-background-clip:text;background-clip:text;color:transparent}
 #auth .sub{text-align:center;color:var(--mut);margin-bottom:22px;font-size:14px}
 .sw{display:flex;margin-bottom:14px;background:#1a1a1a;border-radius:10px;padding:3px}
 .sw button{flex:1;background:none;border:0;color:var(--mut);padding:9px;border-radius:8px;font:600 14px inherit;cursor:pointer}
 .sw button.on{background:#333;color:#fff}
 .err{color:#ff6b6b;font-size:13px;min-height:18px;margin-bottom:8px;text-align:center}
+
+/* ===== Aurora theme ===== */
+.post::before{content:"";position:absolute;inset:0 0 auto 0;height:120px;background:linear-gradient(rgba(0,0,0,.5),transparent);pointer-events:none;z-index:1}
+.tabs span{border:0;padding:8px 18px;border-radius:20px;background:#00000066;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:14px;color:#ffffffcc}
+.tabs span.on{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 4px 16px #7c5cff66}
+.tabs{gap:8px}
+.side{gap:14px}
+.side svg{width:50px;height:50px;padding:13px;border-radius:50%;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);fill:#fff;filter:none;border:1px solid #ffffff22}
+.side .liked svg{fill:var(--like);background:#ff4d8d33;border-color:#ff4d8d66}
+.side button{font-weight:600;text-shadow:0 1px 3px #0008}
+.side .av{border:0;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--acc2)}
+.info>b{display:inline-flex;background:#00000066;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:6px 12px;border-radius:16px;font-size:14px}
+.info p{font-size:14.5px;text-shadow:0 1px 4px #000a}
+nav{background:rgba(14,14,24,.85);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-top:1px solid #ffffff14}
+nav button.on svg{fill:#b7a4ff;filter:drop-shadow(0 0 6px #7c5cff99)}
+nav button.on::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--acc2)}
+nav .plus{flex:0 0 66px}
+nav .plus.on::after{display:none}
+nav .plus i{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 6px 20px #7c5cff80;margin-top:-18px;border:3px solid var(--bar)}
+nav .plus i::after{inset:0;background:none;color:#fff;border-radius:0;font-size:30px;font-weight:300}
+.btn{background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 6px 18px #7c5cff44}
+.btn.sec{background:#1c1c2a;box-shadow:none}
+.btn:active{transform:scale(.98)}
+.fbtn{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+input[type=text],input[type=tel],input[type=password],textarea,#cf input,#mf input{background:#15151f;border:1px solid #26263a}
+input:focus{outline:0;border-color:var(--acc)}
+.sw{background:#15151f}.sw button.on{background:#2a2a40}
+.chip{background:#15151f;border-color:#2a2a40}
+.drop{border-color:#34345a;background:#11111a}
+.grid div{background-color:#15151f;border-radius:6px}
+.grid{gap:4px}
+.bub.me{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.bub.th{background:#1f1f2e}
+#mf button{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+#sheet,#thread header{background:#12121c}
+#thread{background:var(--bg)}
+.cbox{background:#161622;border-color:#2a2a40}
+.cic{background:#ff4d6d26}.cic svg{fill:#ff4d6d}#cyes{background:#ff4d6d}#cno{background:#26263a}
+.row:active,.cv:active,.ppl:active{background:#ffffff0a}
+.stats b{background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.back{background:#1c1c2a}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="toast"></div>
+  <div id="thread"><header><button id="tb" aria-label="Back">‹</button><div class="av" id="th-av"></div><b id="th-name"></b></header><div id="msgs"></div><div id="mf"><input id="mi" placeholder="Message…" maxlength="1000"><button id="ms">Send</button></div></div>
   <div id="cfm"><div class="cbox"><div class="cic"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7zM9 3h6l1 2h4v2H4V5h4z"/></svg></div><h3 id="cT">Delete post?</h3><p id="cM">This cannot be undone.</p><div class="cbtns"><button id="cno">Cancel</button><button id="cyes">Delete</button></div></div></div>
-  <div id="prog"><div class="ring"><svg viewBox="0 0 120 120" width="200" height="200"><defs><linearGradient id="gr"><stop offset="0" stop-color="#25f4ee"/><stop offset="1" stop-color="#fe2c55"/></linearGradient></defs><circle cx="60" cy="60" r="54" fill="none" stroke="#2a2a2a" stroke-width="9"/><circle id="pg-ring" cx="60" cy="60" r="54" fill="none" stroke="url(#gr)" stroke-width="9" stroke-linecap="round" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"/></svg><div id="pg-txt">0%</div></div><div id="pg-lbl">Uploading…</div></div>
+  <div id="prog"><div class="ring"><svg viewBox="0 0 120 120" width="200" height="200"><defs><linearGradient id="gr"><stop offset="0" stop-color="#8b6cff"/><stop offset="1" stop-color="#ff5fa8"/></linearGradient></defs><circle cx="60" cy="60" r="54" fill="none" stroke="#2a2a2a" stroke-width="9"/><circle id="pg-ring" cx="60" cy="60" r="54" fill="none" stroke="url(#gr)" stroke-width="9" stroke-linecap="round" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"/></svg><div id="pg-txt">0%</div></div><div id="pg-lbl">Uploading…</div></div>
 
   <div id="auth">
     <h1>Swipe</h1><div class="sub">Sign in with your mobile number</div>
@@ -113,8 +175,8 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
   </section>
 
   <section class="view" id="v-search"><div class="page">
-    <input type="text" id="q" placeholder="Search users or captions">
-    <div id="people"></div><div id="gh" style="font-size:20px;font-weight:700;margin-bottom:12px">Explore</div><div class="grid" id="grid"></div>
+    <input type="text" id="q" placeholder="Search users, captions or #tags">
+    <div class="chips" id="tags"></div><div id="people"></div><div id="gh" style="font-size:20px;font-weight:700;margin-bottom:12px">Explore</div><div class="grid" id="grid"></div>
   </div></section>
 
   <section class="view" id="v-up"><div class="page">
@@ -122,18 +184,24 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
     <label class="drop" for="file" id="dz">Tap to choose a video or photo</label>
     <input type="file" id="file" accept="video/*,image/*" hidden>
     <img id="prev" alt=""><video id="pv" controls playsinline muted style="width:100%;max-height:300px;border-radius:12px;margin-bottom:10px;display:none;background:#000"></video>
-    <input type="text" id="cap" placeholder="Write a caption…" maxlength="300">
+    <input type="text" id="cap" placeholder="Write a caption… add #tags" maxlength="300">
     <button class="btn" id="post">Post</button>
   </div></section>
 
-  <section class="view" id="v-inbox"><div class="page">
-    <h2>Activity</h2><div id="notes"></div>
+  <section class="view" id="v-chat"><div class="page"><h2>Chats</h2><div id="convos"></div></div></section>
+
+  <section class="view" id="v-settings"><div class="page"><button class="back" data-go="me">← Back</button><h2>Settings</h2>
+    <div class="row" id="s-pic"><span class="i">📷</span>Change profile picture<span class="ch">›</span></div>
+    <div class="row" id="s-act"><span class="i">🔔</span>Activity<span class="ch">›</span></div>
+    <div class="row red" id="logout"><span class="i">🚪</span>Log out</div>
+    <input type="file" id="avf" accept="image/*" hidden>
   </div></section>
 
-  <section class="view" id="v-me"><div class="page prof">
+  <section class="view" id="v-act"><div class="page"><button class="back" data-go="settings">← Back</button><h2>Activity</h2><div id="notes"></div></div></section>
+
+  <section class="view" id="v-me"><button class="gear" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button><div class="page prof">
     <div class="av" id="me-av">?</div><b id="me-name"></b><div style="color:var(--mut);font-size:13px" id="me-mob"></div>
     <div class="stats"><div><b id="n-posts">0</b><span>Posts</span></div><div><b id="n-fol">0</b><span>Followers</span></div><div><b id="n-fing">0</b><span>Following</span></div><div><b id="n-likes">0</b><span>Likes</span></div></div>
-    <button class="btn sec" id="logout">Log out</button>
     <h2 style="margin-top:14px;text-align:left">My posts</h2><div class="grid" id="mine"></div>
   </div></section>
 
@@ -144,7 +212,7 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
     <button data-v="home" class="on"><svg viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>Home</button>
     <button data-v="search"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14l5 5 2-2-5-5A8 8 0 0 0 10 2zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>Discover</button>
     <button data-v="up" class="plus"><i></i></button>
-    <button data-v="inbox"><svg viewBox="0 0 24 24"><path d="M3 4h18v14H8l-5 4z"/></svg>Activity</button>
+    <button data-v="chat"><svg viewBox="0 0 24 24"><path d="M3 4h18v14H8l-5 4z"/></svg>Chat</button>
     <button data-v="me"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.500-9 6v2h18v-2c0-3.500-4-6-9-6z"/></svg>Profile</button>
   </nav>
 </div>
@@ -160,6 +228,7 @@ function askConfirm(title,msg,ok){return new Promise(res=>{
   document.getElementById("cno").onclick=()=>done(false);document.getElementById("cyes").onclick=()=>done(true);
   m.onclick=e=>{if(e.target===m)done(false)};
   m.classList.add("on")})}
+const tagify=t=>esc(t).replace(/#([\p{L}\p{N}_]+)/gu,'<a class="tag" data-t="$1">#$1</a>');
 const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=n=>n>=1e3?(n/1e3).toFixed(1)+"K":n;
 const toast=t=>{const x=$("#toast");x.textContent=t;x.style.opacity=1;clearTimeout(toast.t);toast.t=setTimeout(()=>x.style.opacity=0,2200)};
@@ -173,6 +242,14 @@ async function api(path,opt={}){
 const rpc=(fn,body)=>api("rpc/"+fn,{method:"POST",body:JSON.stringify(body)});
 async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 const hashPw=(mob,pw)=>sha("swipe:"+mob+":"+pw);
+
+/* ---------- Avatars ---------- */
+let avatars={};
+const avInner=(uid,name)=>avatars[uid]?`<img src="${esc(avatars[uid])}" alt="">`:esc((name||"?")[0].toUpperCase());
+async function loadAvatars(ids){
+  ids=[...new Set(ids.filter(Boolean))];if(!ids.length)return;
+  try{const r=await api(`profiles?select=user_id,avatar_url&user_id=in.(${ids.join(",")})`);ids.forEach(i=>avatars[i]=null);r.forEach(x=>avatars[x.user_id]=x.avatar_url)}catch(e){}}
+function paintMe(){if(me)$("#me-av").innerHTML=avInner(me.id,me.name)}
 
 /* ---------- Session ---------- */
 let me=null,posts=[],liked=new Set(),following=new Set(),tab="for",myFollowers=0;
@@ -197,7 +274,9 @@ $("#a-go").onclick=async()=>{
     if(r.error){err.textContent=r.error}else{me=r;saveMe();$("#a-pw").value="";start()}
   }catch(e){err.textContent=e.message}
   b.disabled=false};
-$("#logout").onclick=()=>{me=null;liked=new Set();saveMe();posts=[];$("#feed").innerHTML="";$("#auth").classList.add("on");show("home")};
+$("#logout").onclick=async()=>{
+  if(!await askConfirm("Log out?","You will need your mobile number and password to log in again.","Log out"))return;
+  closeThread();me=null;liked=new Set();saveMe();posts=[];$("#feed").innerHTML="";$("#auth").classList.add("on");show("home")};
 
 /* ---------- Data ---------- */
 async function loadPosts(){
@@ -208,6 +287,7 @@ async function loadPosts(){
     if(following.size){const more=await api(`posts?select=*,likes(count),comments(count)&user_id=in.(${[...following].join(",")})&order=created_at.desc&limit=60`);mergePosts(more)}
   }catch(e){following=new Set()}
   try{myFollowers=(await api("follows?select=follower_id&followed_id=eq."+me.id)).length}catch(e){}
+  await loadAvatars(posts.map(p=>p.user_id).concat(me.id));
   render()}
 function mergePosts(a){a.forEach(p=>{if(!posts.some(x=>x.id===p.id))posts.push(p)});posts.sort((x,y)=>String(y.created_at).localeCompare(String(x.created_at)))}
 const cnt=(p,k)=>(p[k]&&p[k][0]&&p[k][0].count)||0;
@@ -231,11 +311,12 @@ function card(p){
   const d=document.createElement("div");d.className="post";d.dataset.id=p.id;
   const m=p.media_type==="video"?`<video src="${esc(p.media_url)}" loop playsinline muted></video>`:`<img class="m" src="${esc(p.media_url)}" alt="">`;
   d.innerHTML=m+`<div class="shade"></div>
-  <div class="info"><b>@${esc(p.username)}</b><p>${esc(p.caption)}</p></div>
-  <div class="side"><div class="av">${esc((p.username||"?")[0].toUpperCase())}</div>
+  <div class="info"><b>@${esc(p.username)}</b><p>${tagify(p.caption)}</p></div>
+  <div class="side"><div class="av">${avInner(p.user_id,p.username)}</div>
   <button class="lk ${liked.has(p.id)?"liked":""}">${ic.h}<span>${fmt(cnt(p,"likes"))}</span></button>
   <button class="cm">${ic.c}<span>${cnt(p,"comments")}</span></button>
   <button class="sh">${ic.s}<span>Share</span></button>${p.user_id===me.id?`<button class="dl">${ic.d}<span>Delete</span></button>`:""}</div>`;
+  d.querySelectorAll(".tag").forEach(a=>a.onclick=e=>{e.stopPropagation();openTag(a.dataset.t)});
   const lk=d.querySelector(".lk");
   lk.onclick=()=>toggleLike(p,lk);
   d.querySelector(".cm").onclick=()=>openC(p);
@@ -269,7 +350,7 @@ function render(){
   const list=tab==="follow"?posts.filter(p=>following.has(p.user_id)):posts;
   if(!list.length)f.innerHTML=tab==="follow"?'<div class="empty" style="padding-top:35vh">No posts from people you follow.<br>Find people in Discover and tap Follow.</div>':'<div class="empty" style="padding-top:35vh">No posts yet.<br>Tap + to share the first one.</div>';
   list.forEach(p=>{const c=card(p);f.appendChild(c);io.observe(c)});
-  grids();stats();notes()}
+  grids();stats();notes();paintMe()}
 
 /* ---------- Comments ---------- */
 let cur=null;
@@ -295,15 +376,18 @@ function setTab(t){tab=t;$("#t-fl").classList.toggle("on",t==="follow");$("#t-fo
 $("#t-fl").onclick=()=>setTab("follow");$("#t-for").onclick=()=>setTab("for");
 function show(v){
   $$(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
-  $$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  const nv=(v==="settings"||v==="act")?"me":v;
+  $$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===nv));
   $("#sheet").classList.remove("on");
+  clearInterval(cpoll);
+  if(v==="chat"){loadConvos();cpoll=setInterval(()=>{if(!thread)loadConvos()},6000)}
   if(v!=="home")$$("video").forEach(x=>x.pause())}
 $$("nav button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 const thumb=p=>p.media_type==="video"?`<video src="${esc(p.media_url)}#t=0.1" preload="metadata" muted playsinline></video>`:`<img src="${esc(p.media_url)}" alt="" style="width:100%;height:100%;object-fit:cover">`;
-let viewUser=null;
+let viewUser=null,viewTag=null;
 async function openPost(id){
   let p=posts.find(x=>x.id==id);
-  if(!p&&viewUser){p=viewUser.posts.find(x=>x.id==id);if(p){posts.push(p);try{const l=await api(`likes?select=post_id&user_id=eq.${me.id}&post_id=eq.${id}`);if(l.length)liked.add(p.id)}catch(e){}}}
+  if(!p&&(viewUser||viewTag)){p=(viewUser||viewTag).posts.find(x=>x.id==id);if(p){posts.push(p);try{const l=await api(`likes?select=post_id&user_id=eq.${me.id}&post_id=eq.${id}`);if(l.length)liked.add(p.id)}catch(e){}}}
   show("home");
   if(tab!=="for")setTab("for");else if(p&&!$(`#feed [data-id="${id}"]`))render();
   const t=$(`#feed [data-id="${id}"]`);if(t)t.scrollIntoView()}
@@ -317,35 +401,57 @@ async function toggleFollow(id){
     if(on)await api("follows",{method:"POST",body:JSON.stringify({follower_id:me.id,followed_id:id})});
     else await api(`follows?follower_id=eq.${me.id}&followed_id=eq.${id}`,{method:"DELETE"});
   }catch(e){on?following.delete(id):following.add(id);if(viewUser&&viewUser.id===id)viewUser.followers=Math.max(0,(viewUser.followers||0)+(on?-1:1));render();toast("Could not update follow. Run the follow SQL in Supabase")}}
+async function openTag(tag){
+  show("search");viewUser=null;$("#people").innerHTML="";$("#q").value="#"+tag;
+  await tagSearch(tag)}
+async function tagSearch(tag){
+  try{
+    const ps=await api(`posts?select=*,likes(count),comments(count)&caption=ilike.${encodeURIComponent("*#"+tag+"*")}&order=created_at.desc&limit=60`);
+    const re=new RegExp("#"+tag+"(?![\\p{L}\\p{N}_])","iu");
+    viewTag={tag,posts:ps.filter(p=>re.test(p.caption||""))};
+    await loadAvatars(viewTag.posts.map(p=>p.user_id));
+    grids()
+  }catch(e){toast("Could not load tag")}}
 async function searchPeople(){
   const q=$("#q").value.trim(),el=$("#people");
   if(!q){el.innerHTML="";return}
   try{
     const r=await rpc("search_users",{p_q:q});
-    if($("#q").value.trim()!==q)return;
-    el.innerHTML=r.length?'<h2>People</h2>'+r.map(u=>`<div class="ppl" data-id="${esc(u.id)}" data-name="${esc(u.name)}"><div class="av">${esc(u.name[0].toUpperCase())}</div><div><b>${esc(u.name)}</b>${u.id===me.id?"<small>You</small>":following.has(u.id)?"<small>Following</small>":""}</div></div>`).join(""):'<h2>People</h2><div class="empty" style="padding:10px">No users found.</div>';
+    await loadAvatars(r.map(u=>u.id));if($("#q").value.trim()!==q)return;
+    el.innerHTML=r.length?'<h2>People</h2>'+r.map(u=>`<div class="ppl" data-id="${esc(u.id)}" data-name="${esc(u.name)}"><div class="av">${avInner(u.id,u.name)}</div><div><b>${esc(u.name)}</b>${u.id===me.id?"<small>You</small>":following.has(u.id)?"<small>Following</small>":""}</div></div>`).join(""):'<h2>People</h2><div class="empty" style="padding:10px">No users found.</div>';
     $$("#people .ppl").forEach(d=>d.onclick=()=>openUser(d.dataset.id,d.dataset.name))
   }catch(e){el.innerHTML='<div class="empty" style="padding:10px">Search failed: '+esc(e.message)+'</div>'}}
 async function openUser(id,name){
   try{
     const ps=await api(`posts?select=*,likes(count),comments(count)&user_id=eq.${id}&order=created_at.desc`);
     let fc=0;try{fc=(await api(`follows?select=follower_id&followed_id=eq.${id}`)).length}catch(e){}
+    await loadAvatars([id]);
     viewUser={id,name,posts:ps,followers:fc};grids()
   }catch(e){toast("Could not load posts")}}
 function grids(){
   const q=($("#q").value||"").toLowerCase();
   const canSee=!viewUser||viewUser.id===me.id||following.has(viewUser.id);
-  const src=viewUser?(canSee?viewUser.posts:[]):posts;
-  $("#gh").innerHTML=viewUser?`<button class="back" id="bk">← Back</button><div class="uh"><div class="av">${esc(viewUser.name[0].toUpperCase())}</div><div><b>${esc(viewUser.name)}</b><small>${viewUser.posts.length} posts · ${fmt(viewUser.followers||0)} followers</small></div>${viewUser.id!==me.id?`<button class="fbtn ${following.has(viewUser.id)?"on":""}" id="fb">${following.has(viewUser.id)?"Following":"Follow"}</button>`:""}</div>`:"Explore";
-  const bk=$("#bk");if(bk)bk.onclick=()=>{viewUser=null;grids()};
+  const src=viewUser?(canSee?viewUser.posts:[]):viewTag?viewTag.posts:posts;
+  $("#gh").innerHTML=viewUser?`<button class="back" id="bk">← Back</button><div class="uh"><div class="av">${avInner(viewUser.id,viewUser.name)}</div><div><b>${esc(viewUser.name)}</b><small>${viewUser.posts.length} posts · ${fmt(viewUser.followers||0)} followers</small></div>${viewUser.id!==me.id?`<button class="fbtn ${following.has(viewUser.id)?"on":""}" id="fb">${following.has(viewUser.id)?"Following":"Follow"}</button><button class="fbtn on msg" id="mb">Message</button>`:""}</div>`:viewTag?`<button class="back" id="bk">← Back</button><div style="font-size:24px;font-weight:700;color:#c4b5fd">#${esc(viewTag.tag)}</div><small style="color:var(--mut);font-size:12px;font-weight:400">${viewTag.posts.length} posts</small>`:"Explore";
+  const tg=$("#tags");
+  if(!viewUser&&!viewTag&&!q){
+    const cn={};posts.forEach(p=>((p.caption||"").match(/#[\p{L}\p{N}_]+/gu)||[]).forEach(t=>{t=t.toLowerCase();cn[t]=(cn[t]||0)+1}));
+    tg.innerHTML=Object.entries(cn).sort((a,b)=>b[1]-a[1]).slice(0,12).map(([t,n])=>`<div class="chip" data-t="${esc(t.slice(1))}">${esc(t)} · ${n}</div>`).join("");
+    tg.querySelectorAll(".chip").forEach(ch=>ch.onclick=()=>openTag(ch.dataset.t))
+  }else tg.innerHTML="";
+  const bk=$("#bk");if(bk)bk.onclick=()=>{const wt=!!viewTag;viewUser=null;viewTag=null;if(wt){$("#q").value="";$("#people").innerHTML=""}grids()};
   const fb=$("#fb");if(fb)fb.onclick=()=>toggleFollow(viewUser.id);
-  const list=src.filter(p=>!q||((p.username||"")+" "+(p.caption||"")).toLowerCase().includes(q));
+  const mb=$("#mb");if(mb)mb.onclick=()=>openThread(viewUser.id,viewUser.name);
+  const list=src.filter(p=>!q||viewTag||((p.username||"")+" "+(p.caption||"")).toLowerCase().includes(q));
   $("#grid").innerHTML=list.map(p=>`<div data-id="${p.id}">${thumb(p)}</div>`).join("")||`<div class="empty" style="grid-column:1/-1;aspect-ratio:auto">${viewUser&&!canSee?"Follow "+esc(viewUser.name)+" to see their posts.":"Nothing to show."}</div>`;
   $$("#grid div[data-id]").forEach(d=>d.onclick=()=>openPost(d.dataset.id));
   const mine=posts.filter(p=>p.user_id===me.id);
   $("#mine").innerHTML=mine.map(p=>`<div data-id="${p.id}">${thumb(p)}</div>`).join("")||'<div class="empty" style="grid-column:1/-1;aspect-ratio:auto">No posts yet. Tap + to add one.</div>';
   $$("#mine div[data-id]").forEach(d=>d.onclick=()=>{show("home");const t=$(`#feed [data-id="${d.dataset.id}"]`);if(t)t.scrollIntoView()})}
-let qt;$("#q").oninput=()=>{viewUser=null;grids();clearTimeout(qt);qt=setTimeout(searchPeople,300)};
+let qt;$("#q").oninput=()=>{viewUser=null;viewTag=null;grids();clearTimeout(qt);qt=setTimeout(()=>{
+  const v=$("#q").value.trim();
+  if(v.startsWith("#")){$("#people").innerHTML="";const t=(v.slice(1).match(/^[\p{L}\p{N}_]+/u)||[""])[0];if(t)tagSearch(t)}
+  else searchPeople()},300)};
 function stats(){
   const mine=posts.filter(p=>p.user_id===me.id);
   $("#n-posts").textContent=mine.length;
@@ -393,10 +499,75 @@ $("#post").onclick=async()=>{
   }catch(e){toast(e.message)}
   $("#prog").classList.remove("on");b.disabled=false};
 
+/* ---------- Settings: profile picture ---------- */
+function toSquare(file,size=320){return new Promise((res,rej)=>{
+  const img=new Image();
+  img.onload=()=>{const c=document.createElement("canvas");c.width=c.height=size;const x=c.getContext("2d"),m=Math.min(img.width,img.height);
+    x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,size,size);c.toBlob(b=>b?res(b):rej(new Error("Image error")),"image/jpeg",.88)};
+  img.onerror=()=>rej(new Error("Could not read image"));img.src=URL.createObjectURL(file)})}
+$("#gear").onclick=()=>show("settings");
+$$(".back[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+$("#s-act").onclick=()=>{show("act");notes()};
+$("#s-pic").onclick=()=>$("#avf").click();
+$("#avf").onchange=async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f)return;
+  setProg(0,"Updating photo…");$("#prog").classList.add("on");
+  try{
+    const b=await toSquare(f);
+    const path=`avatars/${me.id}-${Date.now()}.jpg`;
+    await upload(path,b);
+    setProg(97,"Saving…");
+    const url=`${URL_}/storage/v1/object/public/media/${path}`;
+    await api("profiles",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({user_id:me.id,avatar_url:url})});
+    avatars[me.id]=url;setProg(100,"Done");await new Promise(r=>setTimeout(r,400));
+    render();show("me");toast("Profile picture updated");
+  }catch(err){toast(err.message+" (did you run the profile SQL?)")}
+  $("#prog").classList.remove("on")};
+
+/* ---------- Chat ---------- */
+let thread=null,tpoll=null,cpoll=null,lastKey="";
+const fmtT=d=>{const x=new Date(d),n=new Date();return x.toDateString()===n.toDateString()?x.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):x.toLocaleDateString([],{month:"short",day:"numeric"})};
+async function loadConvos(){
+  const el=$("#convos");
+  try{
+    const m=await api(`messages?select=*&or=(sender_id.eq.${me.id},receiver_id.eq.${me.id})&order=created_at.desc&limit=300`);
+    const map=new Map();
+    m.forEach(x=>{const mine=x.sender_id===me.id,id=mine?x.receiver_id:x.sender_id;if(!map.has(id))map.set(id,{id,name:mine?x.receiver_name:x.sender_name,last:x.body,at:x.created_at,mine})});
+    const list=[...map.values()];
+    await loadAvatars(list.map(c=>c.id));
+    el.innerHTML=list.length?list.map(c=>`<div class="cv" data-id="${esc(c.id)}" data-name="${esc(c.name)}"><div class="av">${avInner(c.id,c.name)}</div><div class="t"><b>${esc(c.name)}</b><span>${c.mine?"You: ":""}${esc(c.last)}</span></div><time>${fmtT(c.at)}</time></div>`).join(""):'<div class="empty">No chats yet.<br>Search a person in Discover, open their profile and tap Message.</div>';
+    $$("#convos .cv").forEach(d=>d.onclick=()=>openThread(d.dataset.id,d.dataset.name))
+  }catch(e){el.innerHTML='<div class="empty">Chat is not ready. Run the chat SQL in Supabase.<br><small>'+esc(e.message)+'</small></div>'}}
+async function openThread(id,name){
+  thread={id,name};lastKey="";
+  $("#th-name").textContent=name;$("#msgs").innerHTML="";$("#thread").classList.add("on");
+  await loadAvatars([id]);$("#th-av").innerHTML=avInner(id,name);
+  await loadThread();clearInterval(tpoll);tpoll=setInterval(loadThread,3000)}
+function closeThread(){clearInterval(tpoll);thread=null;$("#thread").classList.remove("on");if($("#v-chat").classList.contains("on"))loadConvos()}
+async function loadThread(){
+  if(!thread)return;const t=thread;
+  try{
+    const m=await api(`messages?select=id,sender_id,body,created_at&or=(and(sender_id.eq.${me.id},receiver_id.eq.${t.id}),and(sender_id.eq.${t.id},receiver_id.eq.${me.id}))&order=created_at.asc&limit=300`);
+    if(!thread||thread.id!==t.id)return;
+    const key=m.length+":"+(m.length?m[m.length-1].id:0),first=lastKey==="";
+    if(key===lastKey)return;lastKey=key;
+    const box=$("#msgs"),near=box.scrollHeight-box.scrollTop-box.clientHeight<120;
+    box.innerHTML=m.length?m.map(x=>`<div class="bub ${x.sender_id===me.id?"me":"th"}">${esc(x.body)}<small>${fmtT(x.created_at)}</small></div>`).join(""):'<div class="empty">Say hello 👋</div>';
+    if(near||first)box.scrollTop=box.scrollHeight;
+  }catch(e){if(lastKey==="")$("#msgs").innerHTML='<div class="empty">Chat is not ready. Run the chat SQL in Supabase.</div>'}}
+async function sendMsg(){
+  const v=$("#mi").value.trim();if(!v||!thread)return;$("#mi").value="";
+  try{
+    await api("messages",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({sender_id:me.id,receiver_id:thread.id,sender_name:me.name,receiver_name:thread.name,body:v})});
+    lastKey="";await loadThread();
+  }catch(e){toast("Could not send message");$("#mi").value=v}}
+$("#ms").onclick=sendMsg;$("#mi").onkeydown=e=>{if(e.key==="Enter")sendMsg()};
+$("#tb").onclick=closeThread;
+
 /* ---------- Start ---------- */
 async function start(){
   $("#auth").classList.remove("on");
-  $("#me-av").textContent=me.name[0].toUpperCase();$("#me-name").textContent=me.name;$("#me-mob").textContent="+"+me.mobile;
+  paintMe();$("#me-name").textContent=me.name;$("#me-mob").textContent="+"+me.mobile;
   try{await loadPosts()}catch(e){$("#feed").innerHTML='<div class="empty" style="padding-top:35vh">Could not load posts.<br>Check that the SQL setup was run in Supabase.</div>'}}
 if(me&&me.id)start();else $("#auth").classList.add("on");
 </script>
