@@ -114,6 +114,18 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
 .err{color:#ff6b6b;font-size:13px;min-height:18px;margin-bottom:8px;text-align:center}
 
 /* ===== Aurora theme ===== */
+#feed{touch-action:pan-y}
+.dots{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5;pointer-events:none}
+.dots i{width:6px;height:6px;border-radius:3px;background:#ffffff66;transition:all .25s}.dots i.on{width:20px;background:#fff}
+.snd{position:absolute;top:calc(env(safe-area-inset-top,0px) + 8px);right:12px;z-index:6;width:40px;height:40px;border-radius:50%;border:1px solid #ffffff22;background:#00000066;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:18px;cursor:pointer;color:#fff}
+.sl-r{animation:slr .25s}.sl-l{animation:sll .25s}
+@keyframes slr{from{opacity:0;transform:translateX(-40px)}}
+@keyframes sll{from{opacity:0;transform:translateX(40px)}}
+.ab-card{background:#15151f;border:1px solid #26263a;border-radius:18px;padding:18px;margin-top:12px;text-align:left}
+.ab-card small{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.ab-card h3{font-size:19px;margin:6px 0 8px}.ab-card p{line-height:1.6;color:#d6d6e4;font-size:15px}
+.call{display:flex;align-items:center;gap:12px;margin-top:10px;padding:13px 14px;border-radius:12px;background:#1c1c2a;color:#fff;text-decoration:none;font-size:16px;font-weight:600}
+.call:active{background:#26263a}
 .logo{display:block;width:190px;height:190px;margin:0 auto 8px;border-radius:44px;box-shadow:0 18px 50px #8f3bff66}
 .post::before{content:"";position:absolute;inset:0 0 auto 0;height:120px;background:linear-gradient(rgba(0,0,0,.5),transparent);pointer-events:none;z-index:1}
 .tabs span{border:0;padding:8px 18px;border-radius:20px;background:#00000066;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:14px;color:#ffffffcc}
@@ -174,12 +186,13 @@ input:focus{outline:0;border-color:var(--acc)}
   </div>
 
   <section class="view on" id="v-home">
-    <div class="tabs"><span id="t-fl">Following</span><span id="t-for" class="on">For You</span></div>
+    <div class="dots" id="dots"><i></i><i class="on"></i></div>
+    <button class="snd" id="snd" aria-label="Sound">🔊</button>
     <div id="feed"></div>
   </section>
 
   <section class="view" id="v-search"><div class="page">
-    <input type="text" id="q" placeholder="Search users, captions or #tags">
+    <input type="text" id="q" placeholder="Search name, mobile number or #tags">
     <div class="chips" id="tags"></div><div id="people"></div><div id="gh" style="font-size:20px;font-weight:700;margin-bottom:12px">Explore</div><div class="grid" id="grid"></div>
   </div></section>
 
@@ -187,7 +200,7 @@ input:focus{outline:0;border-color:var(--acc)}
     <h2>New post</h2>
     <label class="drop" for="file" id="dz">Tap to choose a video or photo</label>
     <input type="file" id="file" accept="video/*,image/*" hidden>
-    <img id="prev" alt=""><video id="pv" controls playsinline muted style="width:100%;max-height:300px;border-radius:12px;margin-bottom:10px;display:none;background:#000"></video>
+    <img id="prev" alt=""><video id="pv" controls playsinline style="width:100%;max-height:300px;border-radius:12px;margin-bottom:10px;display:none;background:#000"></video>
     <input type="text" id="cap" placeholder="Write a caption… add #tags" maxlength="300">
     <button class="btn" id="post">Post</button>
   </div></section>
@@ -197,8 +210,19 @@ input:focus{outline:0;border-color:var(--acc)}
   <section class="view" id="v-settings"><div class="page"><button class="back" data-go="me">← Back</button><h2>Settings</h2>
     <div class="row" id="s-pic"><span class="i">📷</span>Change profile picture<span class="ch">›</span></div>
     <div class="row" id="s-act"><span class="i">🔔</span>Activity<span class="ch">›</span></div>
+    <div class="row" id="s-about"><span class="i">ℹ️</span>About<span class="ch">›</span></div>
     <div class="row red" id="logout"><span class="i">🚪</span>Log out</div>
     <input type="file" id="avf" accept="image/*" hidden>
+  </div></section>
+
+  <section class="view" id="v-about"><div class="page" style="text-align:center"><button class="back" data-go="settings" style="float:left">← Back</button><div style="clear:both"></div>
+    <img id="ab-logo" alt="Vybee" style="width:120px;height:120px;border-radius:28px;margin:6px auto 10px;display:block;box-shadow:0 12px 36px #8f3bff55">
+    <h2 style="margin-bottom:2px">Vybee</h2><div style="color:var(--mut);font-size:14px;margin-bottom:18px">Share Your World.</div>
+    <div class="ab-card"><small>Developed by</small><h3>KCST Media Technology</h3>
+      <p>Vadakkumuri<br>Urangattiry (PO)<br>Areekode<br>673639</p></div>
+    <div class="ab-card"><small>Contact</small>
+      <a class="call" href="tel:+919633315177"><span>📞</span>+91 96 333 151 77</a>
+      <a class="call" href="tel:+919074415177"><span>📞</span>+91 90 744 151 77</a></div>
   </div></section>
 
   <section class="view" id="v-act"><div class="page"><button class="back" data-go="settings">← Back</button><h2>Activity</h2><div id="notes"></div></div></section>
@@ -313,7 +337,7 @@ async function toggleLike(p,btn){
   stats()}
 function card(p){
   const d=document.createElement("div");d.className="post";d.dataset.id=p.id;
-  const m=p.media_type==="video"?`<video src="${esc(p.media_url)}" loop playsinline muted></video>`:`<img class="m" src="${esc(p.media_url)}" alt="">`;
+  const m=p.media_type==="video"?`<video src="${esc(p.media_url)}" loop playsinline preload="auto"></video>`:`<img class="m" src="${esc(p.media_url)}" alt="">`;
   d.innerHTML=m+`<div class="shade"></div>
   <div class="info"><b>@${esc(p.username)}</b><p>${tagify(p.caption)}</p></div>
   <div class="side"><div class="av">${avInner(p.user_id,p.username)}</div>
@@ -348,11 +372,21 @@ function card(p){
     else{const v=d.querySelector("video");if(v)v.paused?v.play():v.pause()}
     last=now});
   return d}
-const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target.querySelector("video");if(!v)return;e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.7});
+let soundOn=true,forcedMuted=false;
+function updSnd(){const b=$("#snd");if(b)b.textContent=(soundOn&&!forcedMuted)?"🔊":"🔇"}
+function playVid(v){
+  v.muted=!soundOn||forcedMuted;
+  const pr=v.play();
+  if(pr&&pr.catch)pr.catch(()=>{v.muted=true;forcedMuted=true;updSnd();v.play().catch(()=>{})})}
+const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target.querySelector("video");if(!v)return;e.isIntersecting?playVid(v):v.pause()}),{threshold:.7});
+function playVisible(){
+  const r=$("#feed").getBoundingClientRect();
+  $$("#feed .post").forEach(d=>{const v=d.querySelector("video");if(!v)return;const t=d.getBoundingClientRect().top;
+    if(t>=r.top-r.height*.3&&t<r.top+r.height*.3)playVid(v);else v.pause()})}
 function render(){
   const f=$("#feed");f.innerHTML="";
   const list=tab==="follow"?posts.filter(p=>following.has(p.user_id)):posts;
-  if(!list.length)f.innerHTML=tab==="follow"?'<div class="empty" style="padding-top:35vh">No posts from people you follow.<br>Find people in Discover and tap Follow.</div>':'<div class="empty" style="padding-top:35vh">No posts yet.<br>Tap + to share the first one.</div>';
+  if(!list.length)f.innerHTML=tab==="follow"?'<div class="empty" style="padding-top:35vh">No posts from people you follow.<br>Find people in Discover and tap Follow.<br>Swipe left to go back.</div>':'<div class="empty" style="padding-top:35vh">No posts yet.<br>Tap + to share the first one.</div>';
   list.forEach(p=>{const c=card(p);f.appendChild(c);io.observe(c)});
   grids();stats();notes();paintMe()}
 
@@ -376,16 +410,29 @@ $("#cs").onclick=async()=>{
 $("#ci").onkeydown=e=>{if(e.key==="Enter")$("#cs").click()};
 
 /* ---------- Views ---------- */
-function setTab(t){tab=t;$("#t-fl").classList.toggle("on",t==="follow");$("#t-for").classList.toggle("on",t==="for");render();$("#feed").scrollTop=0}
-$("#t-fl").onclick=()=>setTab("follow");$("#t-for").onclick=()=>setTab("for");
+function setTab(t,dir){
+  tab=t;const d=$$("#dots i");d[0].classList.toggle("on",t==="follow");d[1].classList.toggle("on",t==="for");
+  render();const f=$("#feed");f.scrollTop=0;f.classList.remove("sl-l","sl-r");void f.offsetWidth;if(dir)f.classList.add(dir)}
+let sx=0,sy=0,stt=0;
+$("#feed").addEventListener("pointerdown",e=>{sx=e.clientX;sy=e.clientY;stt=Date.now()});
+$("#feed").addEventListener("pointerup",e=>{
+  const dx=e.clientX-sx,dy=e.clientY-sy;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5&&Date.now()-stt<800){
+    if(dx>0&&tab!=="follow"){setTab("follow","sl-r");toast("Following")}
+    else if(dx<0&&tab!=="for"){setTab("for","sl-l");toast("For You")}}});
+$("#snd").onclick=()=>{
+  if(forcedMuted){forcedMuted=false;soundOn=true}else soundOn=!soundOn;
+  $$("#feed video").forEach(v=>v.muted=!soundOn||forcedMuted);updSnd()};
+document.addEventListener("pointerdown",e=>{
+  if(forcedMuted&&!e.target.closest("#snd")){forcedMuted=false;if(soundOn)$$("#feed video").forEach(v=>v.muted=false);updSnd()}},{passive:true});
 function show(v){
   $$(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
-  const nv=(v==="settings"||v==="act")?"me":v;
+  const nv=(v==="settings"||v==="act"||v==="about")?"me":v;
   $$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===nv));
   $("#sheet").classList.remove("on");
   clearInterval(cpoll);
   if(v==="chat"){loadConvos();cpoll=setInterval(()=>{if(!thread)loadConvos()},6000)}
-  if(v!=="home")$$("video").forEach(x=>x.pause())}
+  if(v!=="home")$$("video").forEach(x=>x.pause());else setTimeout(playVisible,60)}
 $$("nav button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 const thumb=p=>p.media_type==="video"?`<video src="${esc(p.media_url)}#t=0.1" preload="metadata" muted playsinline></video>`:`<img src="${esc(p.media_url)}" alt="" style="width:100%;height:100%;object-fit:cover">`;
 let viewUser=null,viewTag=null;
@@ -422,7 +469,7 @@ async function searchPeople(){
   try{
     const r=await rpc("search_users",{p_q:q});
     await loadAvatars(r.map(u=>u.id));if($("#q").value.trim()!==q)return;
-    el.innerHTML=r.length?'<h2>People</h2>'+r.map(u=>`<div class="ppl" data-id="${esc(u.id)}" data-name="${esc(u.name)}"><div class="av">${avInner(u.id,u.name)}</div><div><b>${esc(u.name)}</b>${u.id===me.id?"<small>You</small>":following.has(u.id)?"<small>Following</small>":""}</div></div>`).join(""):'<h2>People</h2><div class="empty" style="padding:10px">No users found.</div>';
+    el.innerHTML=r.length?'<h2>People</h2>'+r.map(u=>`<div class="ppl" data-id="${esc(u.id)}" data-name="${esc(u.name)}"><div class="av">${avInner(u.id,u.name)}</div><div><b>${esc(u.name)}</b><small>${u.id===me.id?"You":(following.has(u.id)?"Following · ":"")+esc(u.hint||"")}</small></div></div>`).join(""):'<h2>People</h2><div class="empty" style="padding:10px">No users found.</div>';
     $$("#people .ppl").forEach(d=>d.onclick=()=>openUser(d.dataset.id,d.dataset.name))
   }catch(e){el.innerHTML='<div class="empty" style="padding:10px">Search failed: '+esc(e.message)+'</div>'}}
 async function openUser(id,name){
@@ -511,6 +558,7 @@ function toSquare(file,size=320){return new Promise((res,rej)=>{
   img.onerror=()=>rej(new Error("Could not read image"));img.src=URL.createObjectURL(file)})}
 $("#gear").onclick=()=>show("settings");
 $$(".back[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+$("#s-about").onclick=()=>{$("#ab-logo").src=document.querySelector(".logo").src;show("about")};
 $("#s-act").onclick=()=>{show("act");notes()};
 $("#s-pic").onclick=()=>$("#avf").click();
 $("#avf").onchange=async e=>{
