@@ -114,6 +114,10 @@ input[type=text],input[type=tel],input[type=password],textarea{width:100%;backgr
 .err{color:#ff6b6b;font-size:13px;min-height:18px;margin-bottom:8px;text-align:center}
 
 /* ===== Aurora theme ===== */
+nav button{position:relative}
+.bdg{position:absolute;top:5px;left:calc(50% + 4px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:linear-gradient(135deg,var(--acc2),#ff3d6e);color:#fff;font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;border:2px solid var(--bar);box-sizing:content-box;line-height:1}
+.ub{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-style:normal;font-size:11px;font-weight:700;min-width:22px;height:22px;border-radius:11px;display:inline-grid;place-items:center;padding:0 6px;margin-top:6px}
+.info>b,.side .av{cursor:pointer}
 #feed{touch-action:pan-y}
 .dots{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5;pointer-events:none}
 .dots i{width:6px;height:6px;border-radius:3px;background:#ffffff66;transition:all .25s}.dots i.on{width:20px;background:#fff}
@@ -240,7 +244,7 @@ input:focus{outline:0;border-color:var(--acc)}
     <button data-v="home" class="on"><svg viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>Home</button>
     <button data-v="search"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14l5 5 2-2-5-5A8 8 0 0 0 10 2zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>Discover</button>
     <button data-v="up" class="plus"><i></i></button>
-    <button data-v="chat"><svg viewBox="0 0 24 24"><path d="M3 4h18v14H8l-5 4z"/></svg>Chat</button>
+    <button data-v="chat"><svg viewBox="0 0 24 24"><path d="M3 4h18v14H8l-5 4z"/></svg>Chat<b class="bdg" id="bdg"></b></button>
     <button data-v="me"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.500-9 6v2h18v-2c0-3.500-4-6-9-6z"/></svg>Profile</button>
   </nav>
 </div>
@@ -304,7 +308,7 @@ $("#a-go").onclick=async()=>{
   b.disabled=false};
 $("#logout").onclick=async()=>{
   if(!await askConfirm("Log out?","You will need your mobile number and password to log in again.","Log out"))return;
-  closeThread();me=null;liked=new Set();saveMe();posts=[];$("#feed").innerHTML="";$("#auth").classList.add("on");show("home")};
+  closeThread();clearInterval(upoll);unread={};paintBadge();me=null;liked=new Set();saveMe();posts=[];$("#feed").innerHTML="";$("#auth").classList.add("on");show("home")};
 
 /* ---------- Data ---------- */
 async function loadPosts(){
@@ -345,6 +349,9 @@ function card(p){
   <button class="cm">${ic.c}<span>${cnt(p,"comments")}</span></button>
   <button class="sh">${ic.s}<span>Share</span></button>${p.user_id===me.id?`<button class="dl">${ic.d}<span>Delete</span></button>`:""}</div>`;
   d.querySelectorAll(".tag").forEach(a=>a.onclick=e=>{e.stopPropagation();openTag(a.dataset.t)});
+  const nm=d.querySelector(".info b"),sav=d.querySelector(".side .av");
+  nm.onclick=e=>{e.stopPropagation();goProfile(p.user_id,p.username)};
+  sav.onclick=e=>{e.stopPropagation();goProfile(p.user_id,p.username)};
   const lk=d.querySelector(".lk");
   lk.onclick=()=>toggleLike(p,lk);
   d.querySelector(".cm").onclick=()=>openC(p);
@@ -463,6 +470,9 @@ async function tagSearch(tag){
     await loadAvatars(viewTag.posts.map(p=>p.user_id));
     grids()
   }catch(e){toast("Could not load tag")}}
+function goProfile(id,name){
+  if(id===me.id){show("me");return}
+  show("search");viewTag=null;$("#q").value="";$("#people").innerHTML="";openUser(id,name)}
 async function searchPeople(){
   const q=$("#q").value.trim(),el=$("#people");
   if(!q){el.innerHTML="";return}
@@ -577,17 +587,29 @@ $("#avf").onchange=async e=>{
   $("#prog").classList.remove("on")};
 
 /* ---------- Chat ---------- */
-let thread=null,tpoll=null,cpoll=null,lastKey="";
+let thread=null,tpoll=null,cpoll=null,lastKey="",seen={},unread={},upoll=null;
+function loadSeen(){try{seen=JSON.parse(localStorage.getItem("vybee_seen_"+me.id)||"{}")}catch(e){seen={}}}
+function saveSeen(){try{localStorage.setItem("vybee_seen_"+me.id,JSON.stringify(seen))}catch(e){}}
+function paintBadge(){const t=Object.values(unread).reduce((a,b)=>a+b,0),b=$("#bdg");if(!b)return;b.textContent=t>99?"99+":t;b.style.display=t?"flex":"none"}
+function countUnread(rows){
+  unread={};
+  rows.forEach(x=>{if(x.sender_id===me.id)return;if(thread&&x.sender_id===thread.id)return;
+    const sv=seen[x.sender_id];if(!sv||new Date(x.created_at)>new Date(sv))unread[x.sender_id]=(unread[x.sender_id]||0)+1});
+  paintBadge()}
+async function pollUnread(){
+  if(!me)return;
+  try{countUnread(await api(`messages?select=sender_id,created_at&receiver_id=eq.${me.id}&order=created_at.desc&limit=500`))}catch(e){}}
 const fmtT=d=>{const x=new Date(d),n=new Date();return x.toDateString()===n.toDateString()?x.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):x.toLocaleDateString([],{month:"short",day:"numeric"})};
 async function loadConvos(){
   const el=$("#convos");
   try{
     const m=await api(`messages?select=*&or=(sender_id.eq.${me.id},receiver_id.eq.${me.id})&order=created_at.desc&limit=300`);
+    countUnread(m);
     const map=new Map();
     m.forEach(x=>{const mine=x.sender_id===me.id,id=mine?x.receiver_id:x.sender_id;if(!map.has(id))map.set(id,{id,name:mine?x.receiver_name:x.sender_name,last:x.body,at:x.created_at,mine})});
     const list=[...map.values()];
     await loadAvatars(list.map(c=>c.id));
-    el.innerHTML=list.length?list.map(c=>`<div class="cv" data-id="${esc(c.id)}" data-name="${esc(c.name)}"><div class="av">${avInner(c.id,c.name)}</div><div class="t"><b>${esc(c.name)}</b><span>${c.mine?"You: ":""}${esc(c.last)}</span></div><time>${fmtT(c.at)}</time></div>`).join(""):'<div class="empty">No chats yet.<br>Search a person in Discover, open their profile and tap Message.</div>';
+    el.innerHTML=list.length?list.map(c=>`<div class="cv" data-id="${esc(c.id)}" data-name="${esc(c.name)}"><div class="av">${avInner(c.id,c.name)}</div><div class="t"><b>${esc(c.name)}</b><span>${c.mine?"You: ":""}${esc(c.last)}</span></div><div style="text-align:right"><time>${fmtT(c.at)}</time>${unread[c.id]?`<br><em class="ub">${unread[c.id]}</em>`:""}</div></div>`).join(""):'<div class="empty">No chats yet.<br>Search a person in Discover, open their profile and tap Message.</div>';
     $$("#convos .cv").forEach(d=>d.onclick=()=>openThread(d.dataset.id,d.dataset.name))
   }catch(e){el.innerHTML='<div class="empty">Chat is not ready. Run the chat SQL in Supabase.<br><small>'+esc(e.message)+'</small></div>'}}
 async function openThread(id,name){
@@ -602,6 +624,8 @@ async function loadThread(){
     const m=await api(`messages?select=id,sender_id,body,created_at&or=(and(sender_id.eq.${me.id},receiver_id.eq.${t.id}),and(sender_id.eq.${t.id},receiver_id.eq.${me.id}))&order=created_at.asc&limit=300`);
     if(!thread||thread.id!==t.id)return;
     const key=m.length+":"+(m.length?m[m.length-1].id:0),first=lastKey==="";
+    const lastIn=m.filter(x=>x.sender_id!==me.id).pop();
+    if(lastIn&&(!seen[t.id]||new Date(lastIn.created_at)>new Date(seen[t.id]))){seen[t.id]=lastIn.created_at;saveSeen();delete unread[t.id];paintBadge()}
     if(key===lastKey)return;lastKey=key;
     const box=$("#msgs"),near=box.scrollHeight-box.scrollTop-box.clientHeight<120;
     box.innerHTML=m.length?m.map(x=>`<div class="bub ${x.sender_id===me.id?"me":"th"}">${esc(x.body)}<small>${fmtT(x.created_at)}</small></div>`).join(""):'<div class="empty">Say hello 👋</div>';
@@ -618,6 +642,7 @@ $("#tb").onclick=closeThread;
 
 /* ---------- Start ---------- */
 async function start(){
+  loadSeen();pollUnread();clearInterval(upoll);upoll=setInterval(pollUnread,8000);
   $("#auth").classList.remove("on");
   paintMe();$("#me-name").textContent=me.name;$("#me-mob").textContent="+"+me.mobile;
   try{await loadPosts()}catch(e){$("#feed").innerHTML='<div class="empty" style="padding-top:35vh">Could not load posts.<br>Check that the SQL setup was run in Supabase.</div>'}}
